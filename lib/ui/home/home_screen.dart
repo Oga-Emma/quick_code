@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quick_code/ui/home/banks_screen.dart';
+import 'package:quick_code/ui/home/my_codes_screen.dart';
+import 'package:quick_code/ui/home/networks_screen.dart';
+import 'package:quick_code/ui/home/recent_screen.dart';
 import 'package:quick_code/ui/util/color_utils.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
@@ -9,29 +13,46 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  PageController _pageController = PageController();
+
+  var screens = [
+    ScreenTitle(NetworksScreen(), "Networks"),
+    ScreenTitle(BanksScreen(), "Banks"),
+    ScreenTitle(RecentScreen(), "Recent"),
+    ScreenTitle(MyCodesScreen(), "My Codes"),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("${screens[_currentIndex].title}"),
+        actions: <Widget>[
+          IconButton(icon: Icon(EvaIcons.searchOutline), onPressed: () {}),
+          IconButton(icon: Icon(EvaIcons.moreVerticalOutline), onPressed: () {})
+        ],
       ),
-      body: Container(),
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: _pageController,
+        children: screens.map((st) => st.screen).toList(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
           selectedItemColor: ColorUtils.primaryColorDark,
           unselectedItemColor: ColorUtils.primaryColorLight,
           onTap: _tabSelected,
           items: [
-        BottomNavigationBarItem(
-            icon: Icon(EvaIcons.hash), title: Text("Networks")),
-        BottomNavigationBarItem(
-            icon: Icon(EvaIcons.npmOutline), title: Text("Banks")),
-        BottomNavigationBarItem(
-            icon: Icon(EvaIcons.listOutline), title: Text("Recent")),
-        BottomNavigationBarItem(icon: Icon(EvaIcons.personOutline), title: Text("My Codes"))
-      ]),
+            BottomNavigationBarItem(
+                icon: Icon(EvaIcons.hash), title: Text("Networks")),
+            BottomNavigationBarItem(
+                icon: Icon(EvaIcons.npmOutline), title: Text("Banks")),
+            BottomNavigationBarItem(
+                icon: Icon(EvaIcons.listOutline), title: Text("Recent")),
+            BottomNavigationBarItem(
+                icon: Icon(EvaIcons.personOutline), title: Text("My Codes"))
+          ]),
     );
   }
 
@@ -39,5 +60,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _currentIndex = value;
     });
+    switchScreen(value);
   }
+
+  void switchScreen(int index) {
+    _pageController.animateToPage(index,
+        duration: Duration(milliseconds: 300), curve: Curves.ease);
+  }
+}
+
+class ScreenTitle {
+  Widget screen;
+  String title;
+
+  ScreenTitle(this.screen, this.title);
 }
