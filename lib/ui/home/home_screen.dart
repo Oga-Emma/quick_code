@@ -26,7 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${screens[_currentIndex].title}"),
+        brightness: Brightness.light,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: ColorUtils.primaryColor),
+        title: Text(
+          "${screens[_currentIndex].title}",
+          style: TextStyle(color: ColorUtils.primaryColor),
+        ),
         actions: <Widget>[
           IconButton(icon: Icon(EvaIcons.searchOutline), onPressed: () {}),
           IconButton(icon: Icon(EvaIcons.moreVerticalOutline), onPressed: () {})

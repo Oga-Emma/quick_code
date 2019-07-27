@@ -1,16 +1,19 @@
-class UssdModel{
-  final String description;
-  final String baseCode;
-  final List<SubCode> subCodes;
+class UssdModel {
+  String description = "";
+  String baseCode = "";
+  List<SubCode> subCodes = [];
+  List<String> instructions = [];
 
-  UssdModel(this.description, this.baseCode, this.subCodes);
 
-  String toUssd(){
+  UssdModel(
+      {this.description, this.baseCode, this.subCodes, this.instructions});
+
+  String toUssd() {
     return "$baseCode${subCodes.map((sub) => sub.digit).toList().join("*")}\#";
   }
 }
 
-class SubCode{
+class SubCode {
   bool isContact;
   String digit;
   final String label;
