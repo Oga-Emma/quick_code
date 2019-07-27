@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:quick_code/repository/networks_repository.dart';
 import 'package:quick_code/ui/list_items/organization_list_item.dart';
-import 'package:quick_code/ui/util/color_utils.dart';
 
-class NetworksScreen extends StatelessWidget {
+class NetworksScreen extends StatefulWidget {
+  @override
+  _NetworksScreenState createState() => _NetworksScreenState();
+}
+
+class _NetworksScreenState extends State<NetworksScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
