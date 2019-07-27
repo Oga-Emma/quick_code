@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var fidelity = OrganizationDTO()
   ..name = "Fidelity Bank"
+  ..color = Colors.green[600]
   ..coverImage = "assets/img/fidelity_bank.jpg"
   ..baseCode = "*770#"
   ..registerCode = "*770#"

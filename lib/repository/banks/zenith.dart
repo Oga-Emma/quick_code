@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var zenith = OrganizationDTO()
   ..name = "Zenith Bank"
+  ..color = Colors.grey
   ..coverImage = "assets/img/zenith_bank.jpg"
   ..baseCode = "*966#"
   ..registerCode = "*966*00#"

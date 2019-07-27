@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var uba = OrganizationDTO()
   ..name = "UBA Bank"
+  ..color = Colors.red[800]
   ..coverImage = "assets/img/uba_bank.png"
   ..baseCode = "*919#"
   ..registerCode = "*919#"

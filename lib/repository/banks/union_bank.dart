@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var union = OrganizationDTO()
   ..name = "Union Bank"
+  ..color = Colors.blue
   ..coverImage = "assets/img/union_bank.png"
   ..baseCode = "*826#"
   ..registerCode = "*826*5#"

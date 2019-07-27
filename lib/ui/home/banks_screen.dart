@@ -14,10 +14,8 @@ class _BanksScreenState extends State<BanksScreen>  with AutomaticKeepAliveClien
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: GridView.builder(
+        child: ListView.builder(
             itemCount: banks.length,
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
             itemBuilder: (BuildContext context, int index) {
               return OrganizationListItem(banks[index]);
             }),

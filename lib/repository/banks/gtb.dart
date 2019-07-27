@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var gtb = OrganizationDTO()
   ..name = "GTB Bank"
+  ..color = Colors.deepOrange
   ..coverImage = "assets/img/gtb_bank.jpg"
   ..baseCode = "*737#"
   ..registerCode = "*737*5#"

@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var polaris = OrganizationDTO()
   ..name = "Polaris Bank"
+  ..color = Colors.purple
   ..coverImage = "assets/img/polaris_bank.png"
   ..baseCode = "*833#"
   ..registerCode = "*833#"

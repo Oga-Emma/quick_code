@@ -4,6 +4,7 @@ import 'package:quick_code/model/ussd_model.dart';
 // zenith
 var access = OrganizationDTO()
   ..name = "Access Bank"
+  ..color = Colors.orange[600]
   ..coverImage = "assets/img/access.png"
   ..baseCode = "*901#"
   ..registerCode = "*901#"

@@ -17,13 +17,19 @@ class _NetworksScreenState extends State<NetworksScreen>
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(8.0),
-        child: GridView.builder(
+        child: ListView.builder(
+            itemCount: networks.length,
+            itemBuilder: (BuildContext context, int index) {
+              return OrganizationListItem(networks[index]);
+            }),
+
+        /*child: GridView.builder(
             itemCount: networks.length,
             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (BuildContext context, int index) {
               return OrganizationListItem(networks[index]);
-            }),
+            }),*/
       ),
     );
   }

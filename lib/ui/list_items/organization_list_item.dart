@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_code/model/organization_dto.dart';
+import 'package:quick_code/ui/organization_details/organization_details_screen.dart';
 import 'package:quick_code/ui/util/color_utils.dart';
 
 class OrganizationListItem extends StatelessWidget {
@@ -11,7 +12,7 @@ class OrganizationListItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        elevation: 8.0,
+        elevation: 12.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
 //          side: BorderSide(
@@ -22,10 +23,14 @@ class OrganizationListItem extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           splashColor: ColorUtils.primaryColorDark,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => OrganizationDetailsScreen(org)));
+          },
           child: Stack(
             children: <Widget>[
               Container(
+                height: 250,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(org.coverImage), fit: BoxFit.cover)),
@@ -40,7 +45,7 @@ class OrganizationListItem extends StatelessWidget {
                 child: Container(
                   color: Colors
                       .black38, //ColorUtils.primaryColorDark.withOpacity(0.3),
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(16),
                   child: Text(
                     org.name,
                     style: textTheme.title
