@@ -9,52 +9,47 @@ class OrganizationListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 12.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-//          side: BorderSide(
-//              color: ColorUtils.primaryColor,
-//              width: 2,
-//              style: BorderStyle.solid)
-        ),
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: ColorUtils.primaryColorDark,
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => OrganizationDetailsScreen(org)));
-          },
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: 250,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(org.coverImage), fit: BoxFit.cover)),
-              ),
+    return Material(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          side: BorderSide(
+              color: ColorUtils.primaryColor.withOpacity(0.5),
+              width: .5,
+              style: BorderStyle.solid)),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        splashColor: ColorUtils.primaryColorDark,
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => OrganizationDetailsScreen(org)));
+        },
+        child: Stack(
+          children: <Widget>[
+            Container(
+              height: 250,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(org.coverImage), fit: BoxFit.cover)),
+            ),
 //            Container(
 //              color: ColorUtils.primaryColor.withOpacity(0.3),
 //            ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: Colors
-                      .black38, //ColorUtils.primaryColorDark.withOpacity(0.3),
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    org.name,
-                    style: textTheme.title
-                        .copyWith(color: Colors.white, fontSize: 18),
-                  ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                color: Colors.white.withOpacity(
+                    0.9), //ColorUtils.primaryColorDark.withOpacity(0.3),
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Text(
+                  org.name,
+                  style: textTheme.title
+                      .copyWith(color: ColorUtils.primaryColor, fontSize: 14),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

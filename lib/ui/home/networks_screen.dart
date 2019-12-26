@@ -16,21 +16,30 @@ class _NetworksScreenState extends State<NetworksScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(8.0),
-        child: ListView.builder(
-            itemCount: networks.length,
-            itemBuilder: (BuildContext context, int index) {
-              return OrganizationListItem(networks[index]);
-            }),
+          padding: EdgeInsets.all(8.0),
+          child: GridView.builder(
+              itemCount: networks.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 4.0),
+              itemBuilder: (context, index) {
+                return OrganizationListItem(networks[index]);
+              })
+//        ListView.builder(
+//            itemCount: networks.length,
+//            itemBuilder: (BuildContext context, int index) {
+//              return OrganizationListItem(networks[index]);
+//            }),
 
-        /*child: GridView.builder(
+          /*child: GridView.builder(
             itemCount: networks.length,
             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (BuildContext context, int index) {
               return OrganizationListItem(networks[index]);
             }),*/
-      ),
+          ),
     );
   }
 }

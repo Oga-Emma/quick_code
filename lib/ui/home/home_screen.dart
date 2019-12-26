@@ -16,10 +16,10 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController _pageController = PageController();
 
   var screens = [
-    ScreenTitle(NetworksScreen(), "Networks"),
+    ScreenTitle(NetworksScreen(), "Mobile"),
     ScreenTitle(BanksScreen(), "Banks"),
-    ScreenTitle(RecentScreen(), "Recent"),
-    ScreenTitle(MyCodesScreen(), "My Codes"),
+    ScreenTitle(RecentScreen(), "Services"),
+//    ScreenTitle(MyCodesScreen(), "My Codes"),
   ];
 
   @override
@@ -55,9 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(EvaIcons.npmOutline), title: Text("Banks")),
             BottomNavigationBarItem(
-                icon: Icon(EvaIcons.listOutline), title: Text("Recent")),
-            BottomNavigationBarItem(
-                icon: Icon(EvaIcons.personOutline), title: Text("My Codes"))
+                icon: Icon(EvaIcons.settingsOutline), title: Text("Services")),
+//            BottomNavigationBarItem(
+//                icon: Icon(EvaIcons.personOutline), title: Text("My Codes"))
           ]),
     );
   }
