@@ -7,14 +7,14 @@ PODS:
 
 DEPENDENCIES:
   - contact_picker (from `.symlinks/plugins/contact_picker/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `Flutter`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 EXTERNAL SOURCES:
   contact_picker:
     :path: ".symlinks/plugins/contact_picker/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: Flutter
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
 
@@ -23,6 +23,6 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 
-PODFILE CHECKSUM: ebd43b443038e611b86ede96e613bd6033c49497
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

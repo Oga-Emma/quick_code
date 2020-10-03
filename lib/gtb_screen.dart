@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:contact_picker/contact_picker.dart';
 import 'package:quick_code/model/ussd_model.dart';
 import 'package:quick_code/util/gtb_codes.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,9 +10,6 @@ class GTBScreen extends StatefulWidget {
 }
 
 class _GTBScreenState extends State<GTBScreen> {
-  final ContactPicker _contactPicker = new ContactPicker();
-  Contact _contact;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,21 +23,21 @@ class _GTBScreenState extends State<GTBScreen> {
             Expanded(
               child: ListView.builder(
                   itemCount: gtbList.length,
-                  itemBuilder: (context, index){
+                  itemBuilder: (context, index) {
                     var ussd = gtbList[index];
                     return Card(
-                      margin: EdgeInsets.all(8.0),
+                        margin: EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: (){
-                            if(ussd.subCodes.isEmpty){
+                          onTap: () {
+                            if (ussd.subCodes.isEmpty) {
                               print(ussd.toUssd());
                               _launchURL(ussd.toUssd());
-
-                            }else{
+                            } else {
                               showDialog(
                                   context: context,
                                   builder: (_) {
-                                    return USSDSubOptionDialog(ussd, _launchURL);
+                                    return USSDSubOptionDialog(
+                                        ussd, _launchURL);
                                   });
                             }
                           },
@@ -50,8 +46,7 @@ class _GTBScreenState extends State<GTBScreen> {
                             child: Text(ussd.description),
                           ),
                         ));
-
-              }),
+                  }),
             ),
             /*MaterialButton(
               color: Colors.blue,
@@ -92,13 +87,12 @@ class USSDSubOptionDialog extends StatefulWidget {
 }
 
 class _USSDSubOptionDialogState extends State<USSDSubOptionDialog> {
-
   var formKey = GlobalKey<FormState>();
   var listOfControllers = <TextEditingController>[];
 
   @override
   void initState() {
-    widget.ussd.subCodes.forEach((sub){
+    widget.ussd.subCodes.forEach((sub) {
       listOfControllers.add(TextEditingController());
     });
     super.initState();
@@ -106,7 +100,7 @@ class _USSDSubOptionDialogState extends State<USSDSubOptionDialog> {
 
   @override
   void dispose() {
-    for(var controller in listOfControllers){
+    for (var controller in listOfControllers) {
       controller.dispose();
     }
     super.dispose();
@@ -123,60 +117,70 @@ class _USSDSubOptionDialogState extends State<USSDSubOptionDialog> {
               key: formKey,
               child: ListView.builder(
                   shrinkWrap: true,
-                itemCount: widget.ussd.subCodes.length,
-                  itemBuilder: (context, index){
-                var sub = widget.ussd.subCodes[index];
+                  itemCount: widget.ussd.subCodes.length,
+                  itemBuilder: (context, index) {
+                    var sub = widget.ussd.subCodes[index];
 
-                return sub.isContact ?
-               Row(
-                 children: <Widget>[
-                   Expanded(child:  TextFormField(
-                     textInputAction: index < widget.ussd.subCodes.length ? TextInputAction.next : TextInputAction.done,
-                     keyboardType: TextInputType.phone,
-                     controller: listOfControllers[index],
-                     decoration: InputDecoration(labelText: sub.label),
-                     validator: (value){
-                       if(value.length < 11){
-                         return "Invalid phone number";
-                       }
-                       return null;
-                     },
-                     onSaved: (value){
-                       sub.digit = value;
-                     },
-                   )),
-                   IconButton(icon: Icon(Icons.contacts), onPressed: (){
-                     selectPhoneNumber((String contact) {
-                       try{
-                         int phone = int.parse(contact.replaceAll("+234", "").trim().replaceAll(" ", ""));
-                         listOfControllers[index].text = "0$phone";
-                       }catch (e){
-                         /*Scaffold.of(context).showSnackBar(
-                             SnackBar(content: Text("Invalid contact selected"),
-                                 duration: Duration(seconds: 3)));*/
-                         Toast.show("Invalid contact selected", context,
-                             duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
-                       }
-                     });
-                   })
-                 ],
-               ) : TextFormField(
-                  textInputAction: index < widget.ussd.subCodes.length ? TextInputAction.next : TextInputAction.done,
-                  keyboardType: TextInputType.number,
-                  controller: listOfControllers[index],
-                  decoration: InputDecoration(labelText: sub.label),
-                  validator: (value){
-                    if(value.isEmpty){
-                      return "Enter ${sub.label.toLowerCase()}";
-                    }
+                    return sub.isContact
+                        ? Row(
+                            children: <Widget>[
+                              Expanded(
+                                  child: TextFormField(
+                                textInputAction:
+                                    index < widget.ussd.subCodes.length
+                                        ? TextInputAction.next
+                                        : TextInputAction.done,
+                                keyboardType: TextInputType.phone,
+                                controller: listOfControllers[index],
+                                decoration:
+                                    InputDecoration(labelText: sub.label),
+                                validator: (value) {
+                                  if (value.length < 11) {
+                                    return "Invalid phone number";
+                                  }
+                                  return null;
+                                },
+                                onSaved: (value) {
+                                  sub.digit = value;
+                                },
+                              )),
+                              IconButton(
+                                  icon: Icon(Icons.contacts),
+                                  onPressed: () {
+                                    // selectPhoneNumber((String contact) {
+                                    //   try{
+                                    //     int phone = int.parse(contact.replaceAll("+234", "").trim().replaceAll(" ", ""));
+                                    //     listOfControllers[index].text = "0$phone";
+                                    //   }catch (e){
+                                    //     /*Scaffold.of(context).showSnackBar(
+                                    //         SnackBar(content: Text("Invalid contact selected"),
+                                    //             duration: Duration(seconds: 3)));*/
+                                    //     Toast.show("Invalid contact selected", context,
+                                    //         duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                                    //   }
+                                    // });
+                                  })
+                            ],
+                          )
+                        : TextFormField(
+                            textInputAction: index < widget.ussd.subCodes.length
+                                ? TextInputAction.next
+                                : TextInputAction.done,
+                            keyboardType: TextInputType.number,
+                            controller: listOfControllers[index],
+                            decoration: InputDecoration(labelText: sub.label),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Enter ${sub.label.toLowerCase()}";
+                              }
 
-                    return null;
-                  },
-                  onSaved: (value){
-                    sub.digit = "${int.parse(value)}";
-                  },
-                );
-              }),
+                              return null;
+                            },
+                            onSaved: (value) {
+                              sub.digit = "${int.parse(value)}";
+                            },
+                          );
+                  }),
             ),
           ),
         ],
@@ -185,22 +189,19 @@ class _USSDSubOptionDialogState extends State<USSDSubOptionDialog> {
         FlatButton(
             child: Text('Continue'),
             onPressed: () {
-              if(formKey.currentState.validate()){
+              if (formKey.currentState.validate()) {
                 formKey.currentState.save();
                 Navigator.pop(context);
                 widget.launchURL(widget.ussd.toUssd());
               }
-
             })
       ],
     );
   }
 
-
-  final ContactPicker _contactPicker = new ContactPicker();
-  void selectPhoneNumber(Function(String contact) setContact) async {
-    Contact contact = await _contactPicker.selectContact();
-    setContact(contact.phoneNumber.number);
-  }
+  // final ContactPicker _contactPicker = new ContactPicker();
+  // void selectPhoneNumber(Function(String contact) setContact) async {
+  //   Contact contact = await _contactPicker.selectContact();
+  //   setContact(contact.phoneNumber.number);
+  // }
 }
-
